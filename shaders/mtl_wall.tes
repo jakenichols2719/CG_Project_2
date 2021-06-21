@@ -1,0 +1,43 @@
+#version 450 core
+
+layout(quads, equal_spacing, ccw) in;
+
+in TCS_TES_INTERFACE {
+  vec4 vPos;
+  vec2 vTex;
+  vec3 vNrm;
+} tcs_out[];
+
+out TES_GS_INTERFACE {
+  vec4 vPos;
+  vec2 vTex;
+  vec3 vNrm;
+} tes_out;
+
+void main() {
+  float u = gl_TessCoord.x;
+  float v = gl_TessCoord.y;
+  float omu = 1-u;
+  float omv = 1-v;
+
+  tes_out.vPos =
+  omu * omv * tcs_out[0].vPos +
+   u  * omv * tcs_out[1].vPos +
+   u  *  v  * tcs_out[2].vPos +
+  omu *  v  * tcs_out[3].vPos;
+  tes_out.vPos.w = 1;
+  tes_out.vTex =
+  omu * omv * tcs_out[0].vTex +
+   u  * omv * tcs_out[1].vTex +
+   u  *  v  * tcs_out[2].vTex +
+  omu *  v  * tcs_out[3].vTex;
+  tes_out.vNrm =
+  omu * omv * tcs_out[0].vNrm +
+   u  * omv * tcs_out[1].vNrm +
+   u  *  v  * tcs_out[2].vNrm +
+  omu *  v  * tcs_out[3].vNrm;
+
+  // Project vertex (Moved to geom)
+  // mat4 MVP = ProjectionMatrix * ModelViewMatrix;
+  gl_Position = tes_out.vPos;
+}

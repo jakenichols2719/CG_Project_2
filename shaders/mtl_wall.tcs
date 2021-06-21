@@ -1,0 +1,34 @@
+#version 450 core
+
+uniform float TLI = 1000;
+uniform float TLO = 1000;
+// Triangles out
+layout(vertices=4) out;
+
+// Input from vs
+in VS_TCS_INTERFACE {
+  vec4 vPos;
+  vec2 vTex;
+  vec3 vNrm;
+} vs_out[];
+
+out TCS_TES_INTERFACE {
+  vec4 vPos;
+  vec2 vTex;
+  vec3 vNrm;
+} tcs_out[] ;
+
+void main() {
+  // Set patch params for first vertex
+  if(gl_InvocationID == 0) {
+    gl_TessLevelInner[0] = TLI;
+    gl_TessLevelInner[1] = TLI;
+    gl_TessLevelOuter[0] = TLO;
+    gl_TessLevelOuter[1] = TLO;
+    gl_TessLevelOuter[2] = TLO;
+    gl_TessLevelOuter[3] = TLO;
+  }
+  tcs_out[gl_InvocationID].vPos = vs_out[gl_InvocationID].vPos;
+  tcs_out[gl_InvocationID].vTex = vs_out[gl_InvocationID].vTex;
+  tcs_out[gl_InvocationID].vNrm = vs_out[gl_InvocationID].vNrm;
+}

@@ -1,0 +1,3 @@
+jngl is an OpenGL/GLFW library by James Nichols, designed to use
+C++ features and abstraction to ease use of complex OpenGL features
+and math operations.
