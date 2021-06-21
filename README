@@ -1,5 +1,8 @@
 CSCI 4239 Project
 
+A note for GitHub viewers: All of the textures and models have been compressed into data.zip. If you want to run this program, you have to extract
+the two folders there into the main directory.
+
 We made it!
 
 My project is essentially a model viewer with the ability to tweak the
