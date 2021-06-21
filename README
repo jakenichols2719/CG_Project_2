@@ -1,0 +1,51 @@
+CSCI 4239 Project
+
+We made it!
+
+My project is essentially a model viewer with the ability to tweak the
+material properties of individual objects, as well as some basic lighting
+parameters.
+
+Quick Directions:
+make (should target jngl.a properly now)
+./run
+
+=====EXPLANATION OF FEATURES=====
+Below are the features that I think are most interesting in this project.
+-Materials-
+  The program uses stored textures to calculate lighting values for individual
+  surfaces. While ambient and diffuse light are mostly constant for all
+  objects in this scene, this is most apparent with the variation in specular
+  lighting for each object. The book and lamps are great examples of this, but
+  it can also be seen in the wood grain of the desk and floor when there is
+  specular reflection.
+-Bump Maps-
+  The wall uses a bump map to add some texture, which requires an additional
+  tesselation and geometry shader.
+-Shadows-
+  Depth from the POV of the point light (represented here by a cube) is rendered
+  to a framebuffer with a CubeMap depth attachment, which is then referenced
+  by both material shaders in the fragment phase to compare against the "depth"
+  of the current fragment from the light.
+
+=====ISSUES=====
+Unfortunately, I was not able to fix all issues before the due date of this
+assignment. For reasons I have not been able to work out, lighting does not
+function on the ceiling, and the particular bump map I've used for the wall
+is rough and doesn't tile perfectly, so it's been toned down for the final
+project. If you would like to see more intense bumps, you can increase the
+bump_intensity uniform in mtl_wall.geom.
+
+=====CONTROLS=====
+w,a,s,d:	 Move
+arrow keys:	 Rotate camera
+l:			 start/stop light rotation
+p:			 set light position to current camera position
+o:			 reset light to circle
++/-:		 Rotate light manually
+=====CONCLUSION=====
+I had a lot of fun making this, even if it was frustrating at times
+(trying to make shadows work, for example). I would say it took me around
+40-50 hours, keeping in mind that a lot of that was grunt work on JNGL where
+I wasn't necessarily working on the important features you see in the end
+result--more just loading and managing file data.
