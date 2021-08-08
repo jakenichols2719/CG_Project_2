@@ -9,8 +9,16 @@ My project is essentially a model viewer with the ability to tweak the
 material properties of individual objects, as well as some basic lighting
 parameters.
 
+Dependencies:
+glfw
+glew
+glu
+opengl 4.0
+
 Quick Directions:
-make (should target jngl.a properly now)
+IF DOWNLOADED FROM GITHUB: Unzip data.zip into the main folder, it contains the models and textures.
+This may need to be downloaded separately, it is a large file that does not play nicely with Git.
+run "make" from main folder
 ./run
 
 =====EXPLANATION OF FEATURES=====
